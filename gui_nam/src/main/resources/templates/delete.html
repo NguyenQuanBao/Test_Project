@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Delete picture</h1>
+<h2>Are you sure?</h2>
+<p>
+    <a href="/product">Back to list</a>
+</p>
+<form th:action="@{/product/delete}" th:object="${picture}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td th:text="${picture.heHe}"></td>
+        </tr>
+        <td>
+            <img width="100" height="100" th:src="@{'/public/' + ${picture.image}}" alt="" src="">
+        </td>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Delete image"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

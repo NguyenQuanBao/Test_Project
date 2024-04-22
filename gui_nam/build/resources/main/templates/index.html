@@ -1,0 +1,44 @@
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/product/uploadImage">Upload Image</a>
+<div style="margin-bottom: 10px; max-left: 110px">
+    <form th:action="@{/product/search}" method="get">
+        <label><input type="text" name="keyword"></label>
+        <button type="submit">Search</button>
+    </form>
+</div>
+<div class="notify">
+    <div th:if="${message}">
+        <span class="content" th:text="${message}" style="color: green"></span>
+    </div>
+</div>
+<table id="pictures" border="1">
+
+    <tr>
+        <th>Ten</th>
+        <th>Anh</th>
+        <th>Tinh nang</th>
+    </tr>
+    <tr th:each="row : ${all}">
+        <td th:text="${row.heHe}"></td>
+        <td class="td-table">
+            <img class="img-td-table" style="object-fit: contain; max-width: 400px; height: 200px" th:src="@{'/public/' + ${row.image}}" alt="" src="">
+        </td>
+        <td>
+            <a th:href="@{/product/update/__${row.id}__}">Chinh sua</a>
+            <a th:href="@{/product/delete/__${row.id}__}">Xoa</a>
+        </td>
+    </tr>
+</table>
+<a th:if="${all.hasPrevious()}" th:href="@{/product(page=${all.number - 1})}">Previous</a>
+<span th:text="${all.number + 1}"></span> | <span th:text="${all.totalPages}"></span>
+<a th:if="${all.hasNext()}" th:href="@{/product(page=${all.number + 1})}">Next</a>
+</body>
+
+</html>
+
